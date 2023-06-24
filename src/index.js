@@ -33,10 +33,11 @@ app.use(
         secret: "secretcode",
         resave: true,
         saveUninitialized: true,
-        //   cookie: {
-        //     sameSite: "none",
-        //     // secure: true,
-        //   }
+          cookie: {
+            sameSite: "none",
+            secure: true,
+            maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
+          }
     }))
 
 app.use(passport.initialize());
@@ -96,8 +97,8 @@ app.get('/login/oauth2/redirect/google',
     passport.authenticate('google', { failureRedirect: '/login' }),
     function (req, res) {
         //successfull auth redirect to home
-        console.log(`SUCCESS REDIRECT: ${process.env.FRONTEND_URL}/`)
-        res.redirect(`${process.env.FRONTEND_URL}/`)
+        console.log(`SUCCESS REDIRECT: ${process.env.FRONTEND_URL}/home`)
+        res.redirect(`${process.env.FRONTEND_URL}/home`)
     });
 //End Google Statergy
 
