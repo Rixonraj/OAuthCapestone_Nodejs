@@ -98,7 +98,7 @@ app.get('/login/oauth2/redirect/google',
     function (req, res) {
         //successfull auth redirect to home
         console.log(`SUCCESS REDIRECT: ${process.env.FRONTEND_URL}/home`)
-        res.redirect(`${process.env.FRONTEND_URL}`)
+        res.redirect(`${process.env.FRONTEND_URL}/`)
     });
 //End Google Statergy
 
