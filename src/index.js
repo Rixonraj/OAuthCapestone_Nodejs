@@ -20,14 +20,16 @@ mongoose.connect(URL, {
     useUnifiedTopology: true
 }).then(() => console.log('Connected!'));
 
+app.use(express.json())
 
 app.use(cors({
     origin: `${process.env.FRONTEND_URL}`,
     credentials: true
 }))
 
-app.use(express.json())
 app.set("trust proxy", 1);
+
+
 app.use(
     session({
         secret: "secretcode",
@@ -40,8 +42,8 @@ app.use(
           }
     }))
 
-app.use(passport.initialize());
-app.use(passport.session());
+    app.use(passport.initialize());
+    app.use(passport.session());
 
 passport.serializeUser((user, done) => {
     return done(null, user.id);
@@ -187,7 +189,7 @@ app.get('/login/oauth2/redirect/facebook',
 //END Facebook statergy
 
 app.get("/getuser", (req, res) => {
-    console.log(user)
+    console.log(req.user)
     res.send(req.user)
 })
 
