@@ -201,7 +201,7 @@ app.get('/auth/logout', function (req, res, next) {
 });
 
 
-app.listen(4000, async () => {
+app.listen(process.env.PORT || 4000, async () => {
     console.log("Server Starrted");
 
 })
