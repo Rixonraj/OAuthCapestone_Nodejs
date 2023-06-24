@@ -187,6 +187,7 @@ app.get('/login/oauth2/redirect/facebook',
 //END Facebook statergy
 
 app.get("/getuser", (req, res) => {
+    console.log(user)
     res.send(req.user)
 })
 
