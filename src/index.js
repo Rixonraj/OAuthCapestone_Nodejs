@@ -158,7 +158,6 @@ passport.use(new FacebookStrategy({
         userLogin.findOne({ facebookId: profile.id })
             .then((docs) => {
                 if (!docs) {
-                    console.log("(!docs :", docs);
                     const newUser = new userLogin({
                         facebookId: profile.id,
                         username: profile.displayName
@@ -166,7 +165,6 @@ passport.use(new FacebookStrategy({
                     newUser.save().then(function () { return cb(null, newUser) })
 
                 } else if (docs) {
-                    console.log("(docs :", docs);
                     return cb(null, docs);
                 }
             })
@@ -201,7 +199,7 @@ app.get("/", (req, res) => {
 app.get('/auth/logout', function (req, res, next) {
     req.logout(function (err) {
         if (err) { return next(err); }
-        res.redirect('/');
+        res.redirect(`${process.env.FRONTEND_URL}/`);
     });
 });
 
