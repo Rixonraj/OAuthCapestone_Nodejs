@@ -34,9 +34,9 @@ app.use(
     session({
         secret: "secretcode",
         resave: true,
-        saveUninitialized: true,
+        saveUninitialized: false,
           cookie: {
-            sameSite: "none",
+            sameSite: 'none',
             secure: true,
             maxAge: 1000 * 60 * 60 * 24 * 7,
             httpOnly: false
@@ -190,7 +190,6 @@ app.get('/login/oauth2/redirect/facebook',
 //END Facebook statergy
 
 app.get("/getuser", (req, res) => {
-    // console.log(req.user)
     res.send(req.user)
 })
 
