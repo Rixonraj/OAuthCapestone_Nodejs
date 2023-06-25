@@ -25,7 +25,7 @@ app.use(express.json())
 app.use(cors({
     origin: `${process.env.FRONTEND_URL}`,
     credentials: true,
-    exposedHeaders : ['Set-Cookie']
+    exposedHeaders: ['Set-Cookie']
 }))
 
 app.set("trust proxy", 1);
@@ -36,16 +36,16 @@ app.use(
         secret: "secretcode",
         resave: true,
         saveUninitialized: true,
-          cookie: {
+        cookie: {
             sameSite: 'none',
             secure: true,
             maxAge: 1000 * 60 * 60 * 24 * 7,
             httpOnly: true
-          }
+        }
     }))
 
-    app.use(passport.initialize());
-    app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.serializeUser((user, done) => {
     return done(null, user.id);
@@ -98,7 +98,7 @@ app.get('/login/google',
     passport.authenticate('google', { scope: ['profile'] }));
 
 app.get('/login/oauth2/redirect/google',
-    passport.authenticate('google', { failureRedirect:`${process.env.FRONTEND_URL}/login`}),
+    passport.authenticate('google', { failureRedirect: `${process.env.FRONTEND_URL}/login` }),
     function (req, res) {
         //successfull auth redirect to home
         console.log(`SUCCESS REDIRECT: ${process.env.FRONTEND_URL}/home`)
@@ -157,7 +157,7 @@ passport.use(new FacebookStrategy({
     function (accessToken, refreshToken, profile, cb) {
         userLogin.findOne({ facebookId: profile.id })
             .then((docs) => {
-
+                console.log("profile FACEBOOK :", profile)
                 if (!docs) {
                     console.log("(!docs :", docs);
                     const newUser = new userLogin({
