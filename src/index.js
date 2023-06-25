@@ -98,7 +98,7 @@ app.get('/login/google',
     passport.authenticate('google', { scope: ['profile'] }));
 
 app.get('/login/oauth2/redirect/google',
-    passport.authenticate('google', { failureRedirect: '/login' }),
+    passport.authenticate('google', { failureRedirect:`${process.env.FRONTEND_URL}/login`}),
     function (req, res) {
         //successfull auth redirect to home
         console.log(`SUCCESS REDIRECT: ${process.env.FRONTEND_URL}/home`)
@@ -141,7 +141,7 @@ app.get('/login/github',
     passport.authenticate('github'));
 
 app.get('/login/oauth2/redirect/github',
-    passport.authenticate('github', { failureRedirect: '/login' }),
+    passport.authenticate('github', { failureRedirect: `${process.env.FRONTEND_URL}/login` }),
     function (req, res) {
         //successfull auth redirect to home
         res.redirect(`${process.env.FRONTEND_URL}/`)
@@ -182,7 +182,7 @@ app.get('/login/facebook',
     passport.authenticate('facebook'));
 
 app.get('/login/oauth2/redirect/facebook',
-    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    passport.authenticate('facebook', { failureRedirect: `${process.env.FRONTEND_URL}/login` }),
     function (req, res) {
         //successfull auth redirect to home
         res.redirect(`${process.env.FRONTEND_URL}/`)
