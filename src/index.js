@@ -157,12 +157,11 @@ passport.use(new FacebookStrategy({
     function (accessToken, refreshToken, profile, cb) {
         userLogin.findOne({ facebookId: profile.id })
             .then((docs) => {
-                console.log("profile FACEBOOK :", profile)
                 if (!docs) {
                     console.log("(!docs :", docs);
                     const newUser = new userLogin({
                         facebookId: profile.id,
-                        username: profile.username
+                        username: profile.displayName
                     });
                     newUser.save().then(function () { return cb(null, newUser) })
 
