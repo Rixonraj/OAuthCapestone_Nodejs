@@ -190,7 +190,7 @@ app.get('/login/oauth2/redirect/facebook',
 app.get("/getuser", (req, res) => {
     res.send(req.user)
     if(req.user)
-    console.log(req.user)
+    console.log(req)
 })
 
 app.get("/", (req, res) => {
