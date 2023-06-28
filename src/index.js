@@ -189,6 +189,8 @@ app.get('/login/oauth2/redirect/facebook',
 
 app.get("/getuser", (req, res) => {
     res.send(req.user)
+    if(req.user)
+    console.log(req.user)
 })
 
 app.get("/", (req, res) => {
